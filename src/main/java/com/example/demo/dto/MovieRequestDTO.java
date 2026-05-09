@@ -11,7 +11,6 @@ public record MovieRequestDTO(
 
         @DecimalMin(value = "0.5")
         @DecimalMax(value = "5")
-        @Pattern(regexp = "^[0-5](\\.0|\\.5)?$", message = "Rating must be in increments of 0.5 (e.g., 1.0, 1.5, 2.0)")
         Double rating,
 
         @Min(value = 1900)

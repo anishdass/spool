@@ -27,10 +27,10 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieResponseDTO> getMovieById(@PathVariable UUID movieId){
+    public ResponseEntity<MovieResponseDTO> getMovieById(@PathVariable UUID id){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(movieService.findMovieById(movieId));
+                .body(movieService.findMovieById(id));
     }
 
     @PostMapping
