@@ -14,6 +14,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 logging:
   level:
@@ -23,3 +27,4 @@ tmdb:
   api:
     key:  3570b521118764bbb1a871af55e9fb5c
     url:  https://api.themoviedb.org/3
+
