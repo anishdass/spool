@@ -16,11 +16,20 @@ public class TrendingServiceImpl implements TrendingService {
     @Override
     public void incrementMovieScore(String movieId) {
         redisTemplate.opsForZSet()
-                .reverseRange(TRENDING_KEY, 0, 9);
+                .incrementScore(
+                        TRENDING_KEY,
+                        movieId,
+                        1
+                );
     }
 
     @Override
     public Set<String> getTrendingMovies() {
-        return Set.of();
+        return redisTemplate.opsForZSet()
+                .reverseRange(
+                        TRENDING_KEY,
+                        0,
+                        9
+                );
     }
 }

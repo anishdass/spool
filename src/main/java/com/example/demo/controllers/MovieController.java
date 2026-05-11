@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.dto.MovieRequestDTO;
 import com.example.demo.dto.MovieResponseDTO;
 import com.example.demo.services.MovieService;
+import com.example.demo.services.TrendingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -18,6 +20,7 @@ import java.util.UUID;
 @RequestMapping("/api/movies")
 public class MovieController {
     private final MovieService movieService;
+    private final TrendingService trendingService;
 
     @GetMapping
     public ResponseEntity<List<MovieResponseDTO>> getMovies(
@@ -47,6 +50,21 @@ public class MovieController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Movies imported successfully");
+    }
+
+    @PostMapping("/{id}/watch")
+    public ResponseEntity<String> watchMovie(@PathVariable UUID id){
+        trendingService.incrementMovieScore(id.toString());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Movie Watched");
+    }
+
+    @GetMapping("/trending")
+    public ResponseEntity<Set<String>> getTrendingMovies(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(trendingService.getTrendingMovies());
     }
 
 }
