@@ -1,4 +1,4 @@
-# Movie Recommendation Engine
+# Spool
 
 A scalable backend system inspired by Netflix recommendation architecture.
 
